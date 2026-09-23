@@ -13,11 +13,12 @@
 
 <header>
     <h1>Intelligent Timetable System</h1>
-    <p>Timetable Generation & Clash Detection</p>
+    <p>Automatic Timetable Generation & Clash Detection</p>
 </header>
 
 
 <!-- DASHBOARD -->
+
 <section class="dashboard">
 
     <div class="card">
@@ -32,7 +33,17 @@
 
     <div class="card">
         <h3>Classrooms</h3>
-        <p>6</p>
+        <p id="classroomCount">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Labs</h3>
+        <p id="labCount">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Sections</h3>
+        <p id="sectionCount">0</p>
     </div>
 
     <div class="card">
@@ -44,86 +55,290 @@
 
 
 <!-- MASTER DATA -->
+
 <section class="data-section">
 
     <h2>Master Data</h2>
 
 
     <!-- FACULTY -->
-    <div class="form-box">
 
-        <input
-            type="text"
-            id="facultyName"
-            placeholder="Enter Faculty Name"
-        >
+    <div class="master-box">
 
-        <button onclick="addFaculty()">
-            Add Faculty
-        </button>
+        <h3>Faculty</h3>
 
-    </div>
+        <div class="form-grid">
 
+            <input
+                type="text"
+                id="facultyName"
+                placeholder="Faculty Name"
+            >
 
-    <div class="data-list">
+            <input
+                type="text"
+                id="facultyBlocked"
+                placeholder="Blocked slots e.g. Monday 9:00-10:00"
+            >
 
-        <h3>Faculty List</h3>
+            <button onclick="addFaculty()">
+                Add Faculty
+            </button>
+
+        </div>
 
         <ul id="facultyList"></ul>
 
     </div>
 
 
-    <!-- SUBJECTS -->
-    <div class="subject-box">
+    <!-- SUBJECT -->
+
+    <div class="master-box">
 
         <h3>Subjects</h3>
 
-        <input
-            type="text"
-            id="subjectName"
-            placeholder="Enter Subject Name"
-        >
+        <div class="form-grid">
 
-        <button onclick="addSubject()">
-            Add Subject
-        </button>
+            <input
+                type="text"
+                id="subjectName"
+                placeholder="Subject Name"
+            >
 
-        <h3>Subject List</h3>
+            <select id="subjectFaculty">
+                <option value="">Select Faculty</option>
+            </select>
+
+            <select id="subjectSection">
+                <option value="">Select Section</option>
+            </select>
+
+            <select id="subjectType">
+                <option value="Theory">Theory</option>
+                <option value="Lab">Lab</option>
+            </select>
+
+            <input
+                type="number"
+                id="subjectHours"
+                placeholder="Hours per week"
+                min="1"
+                max="10"
+            >
+
+            <button onclick="addSubject()">
+                Add Subject
+            </button>
+
+        </div>
 
         <ul id="subjectList"></ul>
+
+    </div>
+
+
+    <!-- CLASSROOM -->
+
+    <div class="master-box">
+
+        <h3>Classrooms</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="classroomName"
+                placeholder="Classroom Name"
+            >
+
+            <input
+                type="number"
+                id="classroomCapacity"
+                placeholder="Capacity"
+                min="1"
+            >
+
+            <button onclick="addClassroom()">
+                Add Classroom
+            </button>
+
+        </div>
+
+        <ul id="classroomList"></ul>
+
+    </div>
+
+
+    <!-- LAB -->
+
+    <div class="master-box">
+
+        <h3>Labs</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="labName"
+                placeholder="Lab Name"
+            >
+
+            <input
+                type="text"
+                id="labEquipment"
+                placeholder="Equipment / Technology"
+            >
+
+            <button onclick="addLab()">
+                Add Lab
+            </button>
+
+        </div>
+
+        <ul id="labList"></ul>
+
+    </div>
+
+
+    <!-- SECTION -->
+
+    <div class="master-box">
+
+        <h3>Departments / Sections</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="sectionName"
+                placeholder="Example: CSE-A"
+            >
+
+            <input
+                type="text"
+                id="departmentName"
+                placeholder="Department"
+            >
+
+            <button onclick="addSection()">
+                Add Section
+            </button>
+
+        </div>
+
+        <ul id="sectionList"></ul>
+
+    </div>
+
+
+    <!-- DAYS AND TIME -->
+
+    <div class="master-box">
+
+        <h3>Working Days & Time Slots</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="dayName"
+                placeholder="Example: Monday"
+            >
+
+            <input
+                type="text"
+                id="timeSlot"
+                placeholder="Example: 9:00-10:00"
+            >
+
+            <button onclick="addTimeSlot()">
+                Add Slot
+            </button>
+
+        </div>
+
+        <ul id="slotList"></ul>
 
     </div>
 
 </section>
 
 
-<!-- CONTROLS -->
+<!-- ACTIONS -->
+
 <section class="controls">
 
     <button onclick="generateTimetable()">
-        Generate Timetable
+        ⚙ Generate Timetable
     </button>
 
     <button onclick="checkClashes()">
-        Check Clashes
+        🔍 Check Clashes
+    </button>
+
+    <button onclick="saveData()">
+        💾 Save
+    </button>
+
+    <button onclick="loadData()">
+        📂 Load
+    </button>
+
+    <button onclick="saveVersion()">
+        🕒 Save Version
+    </button>
+
+    <button onclick="printTimetable()">
+        🖨 Print
+    </button>
+
+    <button onclick="exportCSV()">
+        📊 Export CSV
     </button>
 
     <button onclick="clearTimetable()">
-        Clear
+        🗑 Clear Timetable
     </button>
 
 </section>
 
 
+<!-- FILTER -->
+
+<section class="filter-section">
+
+    <h2>Timetable Search / Filter</h2>
+
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search subject, faculty, room or section..."
+        oninput="filterTimetable()"
+    >
+
+    <select id="viewFilter" onchange="filterTimetable()">
+        <option value="All">All</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+    </select>
+
+</section>
+
+
 <!-- TIMETABLE -->
+
 <section class="timetable-section">
 
     <h2>Generated Timetable</h2>
 
     <div class="table-container">
 
-        <table>
+        <table id="timetableTable">
 
             <thead>
 
@@ -132,7 +347,9 @@
                     <th>Time</th>
                     <th>Subject</th>
                     <th>Faculty</th>
+                    <th>Section</th>
                     <th>Room</th>
+                    <th>Type</th>
                 </tr>
 
             </thead>
@@ -146,10 +363,21 @@
 </section>
 
 
+<!-- VERSION HISTORY -->
+
+<section class="version-section">
+
+    <h2>Version History</h2>
+
+    <ul id="versionList"></ul>
+
+</section>
+
+
 <div id="message"></div>
 
 
 <script src="script.js"></script>
 
 </body>
-    </html>
+</html>
