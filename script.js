@@ -130,3 +130,40 @@ function clearTimetable() {
     document.getElementById("message").innerText =
         "Timetable cleared.";
       }
+let faculty = [];
+
+function addFaculty() {
+
+    const input = document.getElementById("facultyName");
+
+    const name = input.value.trim();
+
+    if (name === "") {
+        alert("Please enter faculty name.");
+        return;
+    }
+
+    faculty.push(name);
+
+    displayFaculty();
+
+    input.value = "";
+}
+
+
+function displayFaculty() {
+
+    const list = document.getElementById("facultyList");
+
+    list.innerHTML = "";
+
+    faculty.forEach((name, index) => {
+
+        const li = document.createElement("li");
+
+        li.innerHTML = (index + 1) + ". " + name;
+
+        list.appendChild(li);
+
+    });
+}
