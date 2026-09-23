@@ -9,6 +9,9 @@ body {
     color: #222;
 }
 
+
+/* HEADER */
+
 header {
     background: #172554;
     color: white;
@@ -25,53 +28,9 @@ header p {
     font-size: 17px;
     margin-top: 8px;
 }
-.data-section {
-    width: 90%;
-    margin: 30px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px #ccc;
-}
 
-.data-section h2 {
-    text-align: center;
-}
 
-.form-box {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.form-box input {
-    padding: 12px;
-    width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-}
-
-.data-list {
-    margin-top: 20px;
-}
-
-.data-list h3 {
-    text-align: center;
-}
-
-.data-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-.data-list li {
-    background: #f1f5f9;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 6px;
-}
+/* DASHBOARD */
 
 .dashboard {
     display: flex;
@@ -100,69 +59,67 @@ header p {
     margin: 10px;
 }
 
-.controls {
-    text-align: center;
-    margin: 25px;
-}
 
-button {
-    padding: 12px 22px;
-    margin: 8px;
-    border: none;
-    border-radius: 7px;
-    background: #2563eb;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
+/* MASTER DATA */
 
-button:hover {
-    background: #1d4ed8;
-}
-
-.timetable-section {
+.data-section {
     width: 90%;
     margin: 30px auto;
-}
-
-.timetable-section h2 {
-    text-align: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
     background: white;
+    padding: 25px;
+    border-radius: 12px;
     box-shadow: 0 3px 10px #ccc;
 }
 
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 14px;
+.data-section h2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+
+/* INPUT AREA */
+
+.form-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-box input {
+    padding: 12px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+
+/* FACULTY LIST */
+
+.data-list {
+    margin-top: 20px;
+}
+
+.data-list h3 {
     text-align: center;
 }
 
-th {
-    background: #e5e7eb;
+.data-list ul {
+    list-style: none;
+    padding: 0;
 }
 
-tr:hover {
+.data-list li {
     background: #f1f5f9;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
 }
 
-.clash {
-    background: #fee2e2 !important;
-    color: #b91c1c;
-    font-weight: bold;
-}
 
-#message {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 20px;
-}
+/* SUBJECT SECTION */
+
 .subject-box {
     margin-top: 30px;
     padding-top: 20px;
@@ -188,4 +145,121 @@ tr:hover {
     padding: 12px;
     margin: 8px 0;
     border-radius: 6px;
+}
+
+
+/* BUTTONS */
+
+button {
+    padding: 12px 22px;
+    margin: 8px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+
+/* CONTROLS */
+
+.controls {
+    text-align: center;
+    margin: 25px;
+}
+
+
+/* TIMETABLE */
+
+.timetable-section {
+    width: 90%;
+    margin: 30px auto;
+}
+
+.timetable-section h2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 3px 10px #ccc;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 14px;
+    text-align: center;
+}
+
+th {
+    background: #e5e7eb;
+}
+
+tr:hover {
+    background: #f1f5f9;
+}
+
+
+/* CLASH */
+
+.clash {
+    background: #fee2e2 !important;
+    color: #b91c1c;
+    font-weight: bold;
+}
+
+
+/* MESSAGE */
+
+#message {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    header p {
+        font-size: 15px;
+    }
+
+    .data-section {
+        width: 94%;
+        padding: 20px;
+    }
+
+    .timetable-section {
+        width: 94%;
+    }
+
+    .card {
+        width: 150px;
+    }
+
+    button {
+        font-size: 15px;
+    }
 }
