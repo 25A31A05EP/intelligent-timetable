@@ -1,4 +1,115 @@
-const subjects = [
+  /* =========================
+   FACULTY DATA
+========================= */
+
+let faculty = [];
+
+
+/* ADD FACULTY */
+
+function addFaculty() {
+
+    const input = document.getElementById("facultyName");
+
+    const name = input.value.trim();
+
+    if (name === "") {
+
+        alert("Please enter faculty name.");
+
+        return;
+    }
+
+    faculty.push(name);
+
+    displayFaculty();
+
+    updateCounts();
+
+    input.value = "";
+}
+
+
+/* DISPLAY FACULTY */
+
+function displayFaculty() {
+
+    const list = document.getElementById("facultyList");
+
+    list.innerHTML = "";
+
+    faculty.forEach(function(name, index) {
+
+        const li = document.createElement("li");
+
+        li.textContent = (index + 1) + ". " + name;
+
+        list.appendChild(li);
+
+    });
+}
+
+
+
+/* =========================
+   SUBJECT DATA
+========================= */
+
+let subjectsList = [];
+
+
+/* ADD SUBJECT */
+
+function addSubject() {
+
+    const input = document.getElementById("subjectName");
+
+    const name = input.value.trim();
+
+    if (name === "") {
+
+        alert("Please enter subject name.");
+
+        return;
+    }
+
+    subjectsList.push(name);
+
+    displaySubjects();
+
+    updateCounts();
+
+    input.value = "";
+}
+
+
+/* DISPLAY SUBJECTS */
+
+function displaySubjects() {
+
+    const list = document.getElementById("subjectList");
+
+    list.innerHTML = "";
+
+    subjectsList.forEach(function(subject, index) {
+
+        const li = document.createElement("li");
+
+        li.textContent = (index + 1) + ". " + subject;
+
+        list.appendChild(li);
+
+    });
+}
+
+
+
+/* =========================
+   TIMETABLE DATA
+========================= */
+
+const timetableData = [
+
     {
         day: "Monday",
         time: "9:00 - 10:00",
@@ -6,6 +117,7 @@ const subjects = [
         faculty: "Ravi",
         room: "C101"
     },
+
     {
         day: "Monday",
         time: "10:00 - 11:00",
@@ -13,6 +125,7 @@ const subjects = [
         faculty: "Priya",
         room: "C102"
     },
+
     {
         day: "Monday",
         time: "11:00 - 12:00",
@@ -20,6 +133,7 @@ const subjects = [
         faculty: "Kiran",
         room: "C103"
     },
+
     {
         day: "Tuesday",
         time: "9:00 - 10:00",
@@ -27,6 +141,7 @@ const subjects = [
         faculty: "Anitha",
         room: "C101"
     },
+
     {
         day: "Tuesday",
         time: "10:00 - 11:00",
@@ -34,6 +149,7 @@ const subjects = [
         faculty: "Rahul",
         room: "C102"
     },
+
     {
         day: "Tuesday",
         time: "11:00 - 12:00",
@@ -41,8 +157,14 @@ const subjects = [
         faculty: "Priya",
         room: "C103"
     }
+
 ];
 
+
+
+/* =========================
+   GENERATE TIMETABLE
+========================= */
 
 function generateTimetable() {
 
@@ -50,42 +172,62 @@ function generateTimetable() {
 
     table.innerHTML = "";
 
-    subjects.forEach((item, index) => {
+    timetableData.forEach(function(item, index) {
 
         const row = document.createElement("tr");
 
         row.innerHTML = `
+
             <td>${item.day}</td>
+
             <td>${item.time}</td>
+
             <td>${item.subject}</td>
+
             <td>${item.faculty}</td>
+
             <td>${item.room}</td>
+
         `;
 
         table.appendChild(row);
+
     });
 
     document.getElementById("message").innerText =
         "✅ Timetable generated successfully!";
+
 }
 
+
+
+/* =========================
+   CLASH DETECTION
+========================= */
 
 function checkClashes() {
 
     let clashes = 0;
 
-    const rows = document.querySelectorAll("#timetableBody tr");
+    const rows =
+        document.querySelectorAll("#timetableBody tr");
 
-    rows.forEach(row => {
+
+    rows.forEach(function(row) {
+
         row.classList.remove("clash");
+
     });
 
-    for (let i = 0; i < subjects.length; i++) {
 
-        for (let j = i + 1; j < subjects.length; j++) {
+    for (let i = 0; i < timetableData.length; i++) {
 
-            const first = subjects[i];
-            const second = subjects[j];
+        for (let j = i + 1; j < timetableData.length; j++) {
+
+            const first = timetableData[i];
+
+            const second = timetableData[j];
+
 
             if (
                 first.day === second.day &&
@@ -99,14 +241,26 @@ function checkClashes() {
 
                     clashes++;
 
-                    rows[i].classList.add("clash");
-                    rows[j].classList.add("clash");
+                    if (rows[i]) {
+                        rows[i].classList.add("clash");
+                    }
+
+                    if (rows[j]) {
+                        rows[j].classList.add("clash");
+                    }
+
                 }
+
             }
+
         }
+
     }
 
-    document.getElementById("clashCount").innerText = clashes;
+
+    document.getElementById("clashCount").innerText =
+        clashes;
+
 
     if (clashes === 0) {
 
@@ -117,9 +271,16 @@ function checkClashes() {
 
         document.getElementById("message").innerText =
             "⚠️ " + clashes + " clash(es) detected!";
+
     }
+
 }
 
+
+
+/* =========================
+   CLEAR TIMETABLE
+========================= */
 
 function clearTimetable() {
 
@@ -129,72 +290,22 @@ function clearTimetable() {
 
     document.getElementById("message").innerText =
         "Timetable cleared.";
-      }
-let faculty = [];
 
-function addFaculty() {
-
-    const input = document.getElementById("facultyName");
-
-    const name = input.value.trim();
-
-    if (name === "") {
-        alert("Please enter faculty name.");
-        return;
-    }
-
-    faculty.push(name);
-
-    displayFaculty();
-
-    input.value = "";
 }
 
 
-function displayFaculty() {
 
-    const list = document.getElementById("facultyList");
+/* =========================
+   DASHBOARD COUNTS
+========================= */
 
-    list.innerHTML = "";
+function updateCounts() {
 
-    faculty.forEach((name, index) => {
+    document.getElementById("facultyCount").innerText =
+        faculty.length;
 
-        const li = document.createElement("li");
+    document.getElementById("subjectCount").innerText =
+        subjectsList.length;
 
-        li.innerHTML = (index + 1) + ". " + name;
-
-        list.appendChild(li);
-
-    });
-}
-let subjectsList = [];
-
-function addSubject() {
-    const input = document.getElementById("subjectName");
-    const name = input.value.trim();
-
-    if (name === "") {
-        alert("Please enter subject name.");
-        return;
-    }
-
-    subjectsList.push(name);
-
-    displaySubjects();
-
-    input.value = "";
-}
-
-function displaySubjects() {
-    const list = document.getElementById("subjectList");
-
-    list.innerHTML = "";
-
-    subjectsList.forEach(function(subject, index) {
-        const li = document.createElement("li");
-
-        li.textContent = (index + 1) + ". " + subject;
-
-        list.appendChild(li);
-    });
-}
+        }      
+        
