@@ -1,36 +1,45 @@
-  /* =========================
-   FACULTY DATA
+/* =========================
+   DATA
 ========================= */
 
 let faculty = [];
+let subjects = [];
+let classrooms = [];
+let labs = [];
+let sections = [];
+let timeSlots = [];
+
+let timetable = [];
+let versions = [];
 
 
-/* ADD FACULTY */
+/* =========================
+   FACULTY
+========================= */
 
 function addFaculty() {
 
-    const input = document.getElementById("facultyName");
-
-    const name = input.value.trim();
+    const name = document.getElementById("facultyName").value.trim();
+    const blocked = document.getElementById("facultyBlocked").value.trim();
 
     if (name === "") {
-
         alert("Please enter faculty name.");
-
         return;
     }
 
-    faculty.push(name);
+    faculty.push({
+        name: name,
+        blocked: blocked
+    });
+
+    document.getElementById("facultyName").value = "";
+    document.getElementById("facultyBlocked").value = "";
 
     displayFaculty();
-
     updateCounts();
-
-    input.value = "";
+    updateDropdowns();
 }
 
-
-/* DISPLAY FACULTY */
 
 function displayFaculty() {
 
@@ -38,52 +47,63 @@ function displayFaculty() {
 
     list.innerHTML = "";
 
-    faculty.forEach(function(name, index) {
+    faculty.forEach(function(item, index) {
 
         const li = document.createElement("li");
 
-        li.textContent = (index + 1) + ". " + name;
+        li.textContent =
+            (index + 1) + ". " +
+            item.name +
+            (item.blocked ? " | Blocked: " + item.blocked : "");
 
         list.appendChild(li);
-
     });
 }
 
 
-
 /* =========================
-   SUBJECT DATA
+   SUBJECTS
 ========================= */
-
-let subjectsList = [];
-
-
-/* ADD SUBJECT */
 
 function addSubject() {
 
-    const input = document.getElementById("subjectName");
+    const name =
+        document.getElementById("subjectName").value.trim();
 
-    const name = input.value.trim();
+    const facultyName =
+        document.getElementById("subjectFaculty").value;
 
-    if (name === "") {
+    const section =
+        document.getElementById("subjectSection").value;
 
-        alert("Please enter subject name.");
+    const type =
+        document.getElementById("subjectType").value;
+
+    const hours =
+        Number(document.getElementById("subjectHours").value);
+
+    if (name === "" || facultyName === "" || section === "" || hours <= 0) {
+
+        alert("Please enter all subject details.");
 
         return;
     }
 
-    subjectsList.push(name);
+    subjects.push({
+        name: name,
+        faculty: facultyName,
+        section: section,
+        type: type,
+        hours: hours
+    });
+
+    document.getElementById("subjectName").value = "";
+    document.getElementById("subjectHours").value = "";
 
     displaySubjects();
-
     updateCounts();
-
-    input.value = "";
 }
 
-
-/* DISPLAY SUBJECTS */
 
 function displaySubjects() {
 
@@ -91,221 +111,140 @@ function displaySubjects() {
 
     list.innerHTML = "";
 
-    subjectsList.forEach(function(subject, index) {
+    subjects.forEach(function(item, index) {
 
         const li = document.createElement("li");
 
-        li.textContent = (index + 1) + ". " + subject;
+        li.textContent =
+            (index + 1) + ". " +
+            item.name +
+            " | Faculty: " + item.faculty +
+            " | Section: " + item.section +
+            " | " + item.type +
+            " | " + item.hours + " hrs/week";
 
         list.appendChild(li);
-
     });
 }
 
 
-
 /* =========================
-   TIMETABLE DATA
+   CLASSROOMS
 ========================= */
 
-const timetableData = [
+function addClassroom() {
 
-    {
-        day: "Monday",
-        time: "9:00 - 10:00",
-        subject: "Java",
-        faculty: "Ravi",
-        room: "C101"
-    },
+    const name =
+        document.getElementById("classroomName").value.trim();
 
-    {
-        day: "Monday",
-        time: "10:00 - 11:00",
-        subject: "DBMS",
-        faculty: "Priya",
-        room: "C102"
-    },
+    const capacity =
+        Number(document.getElementById("classroomCapacity").value);
 
-    {
-        day: "Monday",
-        time: "11:00 - 12:00",
-        subject: "Python",
-        faculty: "Kiran",
-        room: "C103"
-    },
+    if (name === "" || capacity <= 0) {
 
-    {
-        day: "Tuesday",
-        time: "9:00 - 10:00",
-        subject: "Computer Networks",
-        faculty: "Anitha",
-        room: "C101"
-    },
+        alert("Please enter classroom name and capacity.");
 
-    {
-        day: "Tuesday",
-        time: "10:00 - 11:00",
-        subject: "Operating Systems",
-        faculty: "Rahul",
-        room: "C102"
-    },
-
-    {
-        day: "Tuesday",
-        time: "11:00 - 12:00",
-        subject: "Mathematics",
-        faculty: "Priya",
-        room: "C103"
+        return;
     }
 
-];
-
-
-
-/* =========================
-   GENERATE TIMETABLE
-========================= */
-
-function generateTimetable() {
-
-    const table = document.getElementById("timetableBody");
-
-    table.innerHTML = "";
-
-    timetableData.forEach(function(item, index) {
-
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-
-            <td>${item.day}</td>
-
-            <td>${item.time}</td>
-
-            <td>${item.subject}</td>
-
-            <td>${item.faculty}</td>
-
-            <td>${item.room}</td>
-
-        `;
-
-        table.appendChild(row);
-
+    classrooms.push({
+        name: name,
+        capacity: capacity
     });
 
-    document.getElementById("message").innerText =
-        "✅ Timetable generated successfully!";
+    document.getElementById("classroomName").value = "";
+    document.getElementById("classroomCapacity").value = "";
 
+    displayClassrooms();
+    updateCounts();
 }
 
 
+function displayClassrooms() {
+
+    const list = document.getElementById("classroomList");
+
+    list.innerHTML = "";
+
+    classrooms.forEach(function(item, index) {
+
+        const li = document.createElement("li");
+
+        li.textContent =
+            (index + 1) + ". " +
+            item.name +
+            " | Capacity: " +
+            item.capacity;
+
+        list.appendChild(li);
+    });
+}
+
 
 /* =========================
-   CLASH DETECTION
+   LABS
 ========================= */
 
-function checkClashes() {
+function addLab() {
 
-    let clashes = 0;
+    const name =
+        document.getElementById("labName").value.trim();
 
-    const rows =
-        document.querySelectorAll("#timetableBody tr");
+    const equipment =
+        document.getElementById("labEquipment").value.trim();
 
+    if (name === "") {
 
-    rows.forEach(function(row) {
+        alert("Please enter lab name.");
 
-        row.classList.remove("clash");
+        return;
+    }
 
+    labs.push({
+        name: name,
+        equipment: equipment
     });
 
+    document.getElementById("labName").value = "";
+    document.getElementById("labEquipment").value = "";
 
-    for (let i = 0; i < timetableData.length; i++) {
-
-        for (let j = i + 1; j < timetableData.length; j++) {
-
-            const first = timetableData[i];
-
-            const second = timetableData[j];
-
-
-            if (
-                first.day === second.day &&
-                first.time === second.time
-            ) {
-
-                if (
-                    first.faculty === second.faculty ||
-                    first.room === second.room
-                ) {
-
-                    clashes++;
-
-                    if (rows[i]) {
-                        rows[i].classList.add("clash");
-                    }
-
-                    if (rows[j]) {
-                        rows[j].classList.add("clash");
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
-
-    document.getElementById("clashCount").innerText =
-        clashes;
-
-
-    if (clashes === 0) {
-
-        document.getElementById("message").innerText =
-            "✅ No clashes detected! Timetable is clash-free.";
-
-    } else {
-
-        document.getElementById("message").innerText =
-            "⚠️ " + clashes + " clash(es) detected!";
-
-    }
-
+    displayLabs();
+    updateCounts();
 }
 
 
+function displayLabs() {
 
-/* =========================
-   CLEAR TIMETABLE
-========================= */
+    const list = document.getElementById("labList");
 
-function clearTimetable() {
+    list.innerHTML = "";
 
-    document.getElementById("timetableBody").innerHTML = "";
+    labs.forEach(function(item, index) {
 
-    document.getElementById("clashCount").innerText = "0";
+        const li = document.createElement("li");
 
-    document.getElementById("message").innerText =
-        "Timetable cleared.";
+        li.textContent =
+            (index + 1) + ". " +
+            item.name +
+            (item.equipment
+                ? " | Equipment: " + item.equipment
+                : "");
 
+        list.appendChild(li);
+    });
 }
 
 
-
 /* =========================
-   DASHBOARD COUNTS
+   SECTIONS
 ========================= */
 
-function updateCounts() {
+function addSection() {
 
-    document.getElementById("facultyCount").innerText =
-        faculty.length;
+    const name =
+        document.getElementById("sectionName").value.trim();
 
-    document.getElementById("subjectCount").innerText =
-        subjectsList.length;
+    const department =
+        document.getElementById("departmentName").value.trim();
 
-        }      
-        
+    if (name === "" || department === "")
