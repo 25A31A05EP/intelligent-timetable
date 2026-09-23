@@ -167,3 +167,34 @@ function displayFaculty() {
 
     });
 }
+let subjectsList = [];
+
+function addSubject() {
+    const input = document.getElementById("subjectName");
+    const name = input.value.trim();
+
+    if (name === "") {
+        alert("Please enter subject name.");
+        return;
+    }
+
+    subjectsList.push(name);
+
+    displaySubjects();
+
+    input.value = "";
+}
+
+function displaySubjects() {
+    const list = document.getElementById("subjectList");
+
+    list.innerHTML = "";
+
+    subjectsList.forEach(function(subject, index) {
+        const li = document.createElement("li");
+
+        li.textContent = (index + 1) + ". " + subject;
+
+        list.appendChild(li);
+    });
+}
