@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,48 +11,59 @@
 
 <body>
 
-    <header>
-        <h1>Intelligent Timetable System</h1>
-        <p>Timetable Generation & Clash Detection</p>
-    </header>
+<header>
+    <h1>Intelligent Timetable System</h1>
+    <p>Timetable Generation & Clash Detection</p>
+</header>
 
-    <section class="dashboard">
 
-        <div class="card">
-            <h3>Faculty</h3>
-            <p>10</p>
-        </div>
+<!-- DASHBOARD -->
+<section class="dashboard">
 
-        <div class="card">
-            <h3>Subjects</h3>
-            <p>8</p>
-        </div>
+    <div class="card">
+        <h3>Faculty</h3>
+        <p id="facultyCount">0</p>
+    </div>
 
-        <div class="card">
-            <h3>Classrooms</h3>
-            <p>6</p>
-        </div>
+    <div class="card">
+        <h3>Subjects</h3>
+        <p id="subjectCount">0</p>
+    </div>
 
-        <div class="card">
-            <h3>Clashes</h3>
-            <p id="clashCount">0</p>
-        </div>
+    <div class="card">
+        <h3>Classrooms</h3>
+        <p>6</p>
+    </div>
 
-    </section>
+    <div class="card">
+        <h3>Clashes</h3>
+        <p id="clashCount">0</p>
+    </div>
+
+</section>
+
+
+<!-- MASTER DATA -->
 <section class="data-section">
 
     <h2>Master Data</h2>
 
+
+    <!-- FACULTY -->
     <div class="form-box">
 
-        <input type="text" id="facultyName"
-               placeholder="Enter Faculty Name">
+        <input
+            type="text"
+            id="facultyName"
+            placeholder="Enter Faculty Name"
+        >
 
         <button onclick="addFaculty()">
             Add Faculty
         </button>
 
     </div>
+
 
     <div class="data-list">
 
@@ -62,47 +72,61 @@
         <ul id="facultyList"></ul>
 
     </div>
-<div class="subject-box">
 
-    <h3>Subjects</h3>
 
-    <input type="text"
-           id="subjectName"
-           placeholder="Enter Subject Name">
+    <!-- SUBJECTS -->
+    <div class="subject-box">
 
-    <button onclick="addSubject()">
-        Add Subject
+        <h3>Subjects</h3>
+
+        <input
+            type="text"
+            id="subjectName"
+            placeholder="Enter Subject Name"
+        >
+
+        <button onclick="addSubject()">
+            Add Subject
+        </button>
+
+        <h3>Subject List</h3>
+
+        <ul id="subjectList"></ul>
+
+    </div>
+
+</section>
+
+
+<!-- CONTROLS -->
+<section class="controls">
+
+    <button onclick="generateTimetable()">
+        Generate Timetable
     </button>
 
-    <h3>Subject List</h3>
+    <button onclick="checkClashes()">
+        Check Clashes
+    </button>
 
-    <ul id="subjectList"></ul>
+    <button onclick="clearTimetable()">
+        Clear
+    </button>
 
-</div>
 </section>
-    <section class="controls">
 
-        <button onclick="generateTimetable()">
-            Generate Timetable
-        </button>
 
-        <button onclick="checkClashes()">
-            Check Clashes
-        </button>
+<!-- TIMETABLE -->
+<section class="timetable-section">
 
-        <button onclick="clearTimetable()">
-            Clear
-        </button>
+    <h2>Generated Timetable</h2>
 
-    </section>
-
-    <section class="timetable-section">
-
-        <h2>Generated Timetable</h2>
+    <div class="table-container">
 
         <table>
 
             <thead>
+
                 <tr>
                     <th>Day</th>
                     <th>Time</th>
@@ -110,19 +134,22 @@
                     <th>Faculty</th>
                     <th>Room</th>
                 </tr>
+
             </thead>
 
-            <tbody id="timetableBody">
-            </tbody>
+            <tbody id="timetableBody"></tbody>
 
         </table>
 
-    </section>
+    </div>
 
-    <div id="message"></div>
+</section>
 
-    <script src="script.js"></script>
+
+<div id="message"></div>
+
+
+<script src="script.js"></script>
 
 </body>
-
-</html>
+    </html>
