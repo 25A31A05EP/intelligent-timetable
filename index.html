@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Intelligent Timetable System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Intelligent Timetable System</h1>
+        <p>Timetable Generation & Clash Detection</p>
+    </header>
+
+    <section class="dashboard">
+
+        <div class="card">
+            <h3>Faculty</h3>
+            <p>10</p>
+        </div>
+
+        <div class="card">
+            <h3>Subjects</h3>
+            <p>8</p>
+        </div>
+
+        <div class="card">
+            <h3>Classrooms</h3>
+            <p>6</p>
+        </div>
+
+        <div class="card">
+            <h3>Clashes</h3>
+            <p id="clashCount">0</p>
+        </div>
+
+    </section>
+
+    <section class="controls">
+
+        <button onclick="generateTimetable()">
+            Generate Timetable
+        </button>
+
+        <button onclick="checkClashes()">
+            Check Clashes
+        </button>
+
+        <button onclick="clearTimetable()">
+            Clear
+        </button>
+
+    </section>
+
+    <section class="timetable-section">
+
+        <h2>Generated Timetable</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Subject</th>
+                    <th>Faculty</th>
+                    <th>Room</th>
+                </tr>
+            </thead>
+
+            <tbody id="timetableBody">
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <div id="message"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
