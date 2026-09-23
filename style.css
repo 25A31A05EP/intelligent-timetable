@@ -25,6 +25,53 @@ header p {
     font-size: 17px;
     margin-top: 8px;
 }
+.data-section {
+    width: 90%;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #ccc;
+}
+
+.data-section h2 {
+    text-align: center;
+}
+
+.form-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-box input {
+    padding: 12px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.data-list {
+    margin-top: 20px;
+}
+
+.data-list h3 {
+    text-align: center;
+}
+
+.data-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.data-list li {
+    background: #f1f5f9;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+}
 
 .dashboard {
     display: flex;
